@@ -12,6 +12,8 @@ using Microsoft.Azure.IoTSolutions.IotHubManager.Services.Runtime;
 using DeviceJobStatus = Microsoft.Azure.IoTSolutions.IotHubManager.Services.Models.DeviceJobStatus;
 using JobStatus = Microsoft.Azure.IoTSolutions.IotHubManager.Services.Models.JobStatus;
 using JobType = Microsoft.Azure.IoTSolutions.IotHubManager.Services.Models.JobType;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services
 {
@@ -51,15 +53,16 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services
 
         private const string DEVICE_DETAILS_QUERY_FORMAT = "select * from devices.jobs where devices.jobs.jobId = '{0}'";
         private const string DEVICE_DETAILS_QUERYWITH_STATUS_FORMAT = "select * from devices.jobs where devices.jobs.jobId = '{0}' and devices.jobs.status = '{1}'";
+        private Cache cache;
 
-        public Jobs(
+        public Jobs(Cache cache,
             IServicesConfig config)
         {
             if (config == null)
             {
                 throw new ArgumentNullException("config");
             }
-
+            this.cache = cache;
             IoTHubConnectionHelper.CreateUsingHubConnectionString(
                 config.IoTHubConnString,
                 conn => { this.jobClient = JobClient.CreateFromConnectionString(conn); });
@@ -140,7 +143,20 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services
                 maxExecutionTimeInSeconds);
 
             // Update the deviceGroupFilter cache, no need to wait
-            var unused = this.configService.UpdateDeviceGroupFiltersAsync(twin);
+            var model = new CacheValue();
+
+            var tagRoot = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(twin.Tags)) as JToken;
+            if (tagRoot != null)
+            {
+                model.Tags = new HashSet<string>(tagRoot.GetAllLeavesPath());
+            }
+
+            var reportedRoot = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(twin.ReportedProperties)) as JToken;
+            if (reportedRoot != null)
+            {
+                model.Reported = new HashSet<string>(reportedRoot.GetAllLeavesPath());
+            }
+            var unused = this.cache.SetCacheAsync(model);
 
             return new JobServiceModel(result);
         }
