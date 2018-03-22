@@ -41,14 +41,12 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services
         private const string WHITELIST_REPORTED_PREFIX = "reported.";
 
         public Cache(IStorageAdapterClient storageClient,
-            //IIothubManagerServiceClient iotHubClient,
             IDevices devices,
             ISimulationServiceClient simulationClient,
             IServicesConfig config,
             ILogger logger)
         {
             this.storageClient = storageClient;
-            //this.iotHubClient = iotHubClient;
             this.devices = devices;
             this.simulationClient = simulationClient;
             this.log = logger;

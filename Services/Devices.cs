@@ -32,9 +32,9 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services
 
         private RegistryManager registry;
         private string ioTHubHostName;
-        private Cache cache;
+        private ICache cache;
 
-        public Devices(Cache cache,
+        public Devices(ICache cache,
             IServicesConfig config)
         {
             if (config == null)

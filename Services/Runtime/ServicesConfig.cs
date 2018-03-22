@@ -6,6 +6,7 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services.Runtime
     {
         string IoTHubConnString { get; set; }
         string StorageAdapterApiUrl { get; set; }
+        string DeviceSimulationApiUrl { get; set; }
         string CacheWhiteList { get; }
         // ReSharper disable once InconsistentNaming
         long CacheTTL { get; }
@@ -16,6 +17,7 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services.Runtime
     {
         public string IoTHubConnString { get; set; }
         public string StorageAdapterApiUrl { get; set; }
+        public string DeviceSimulationApiUrl { get; set; }
         public string CacheWhiteList { get; set; }
         public long CacheTTL { get; set; }
         public long CacheRebuildTimeout { get; set; }
