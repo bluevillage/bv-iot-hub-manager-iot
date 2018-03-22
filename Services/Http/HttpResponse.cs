@@ -11,6 +11,7 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services.Http
         HttpResponseHeaders Headers { get; }
         string Content { get; }
         bool IsRetriableError { get; }
+        bool IsSuccessStatusCode { get; }
     }
 
     public class HttpResponse : IHttpResponse
@@ -38,5 +39,6 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services.Http
         public bool IsRetriableError => this.StatusCode == HttpStatusCode.NotFound ||
                                         this.StatusCode == HttpStatusCode.RequestTimeout ||
                                         (int) this.StatusCode == TOO_MANY_REQUESTS;
+        public bool IsSuccessStatusCode { get; internal set; }
     }
 }

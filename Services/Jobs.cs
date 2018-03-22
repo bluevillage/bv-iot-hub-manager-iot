@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices;
 using Microsoft.Azure.IoTSolutions.IotHubManager.Services.Extensions;
-using Microsoft.Azure.IoTSolutions.IotHubManager.Services.External;
 using Microsoft.Azure.IoTSolutions.IotHubManager.Services.Helpers;
 using Microsoft.Azure.IoTSolutions.IotHubManager.Services.Models;
 using Microsoft.Azure.IoTSolutions.IotHubManager.Services.Runtime;
@@ -49,14 +48,12 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services
     {
         private JobClient jobClient;
         private RegistryManager registryManager;
-        private readonly IConfigService configService;
 
         private const string DEVICE_DETAILS_QUERY_FORMAT = "select * from devices.jobs where devices.jobs.jobId = '{0}'";
         private const string DEVICE_DETAILS_QUERYWITH_STATUS_FORMAT = "select * from devices.jobs where devices.jobs.jobId = '{0}' and devices.jobs.status = '{1}'";
 
         public Jobs(
-            IServicesConfig config,
-            IConfigService configService)
+            IServicesConfig config)
         {
             if (config == null)
             {
@@ -70,8 +67,6 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.Services
             IoTHubConnectionHelper.CreateUsingHubConnectionString(
                 config.IoTHubConnString,
                 conn => { this.registryManager = RegistryManager.CreateFromConnectionString(conn); });
-
-            this.configService = configService;
         }
 
         public async Task<IEnumerable<JobServiceModel>> GetJobsAsync(
