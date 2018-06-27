@@ -11,7 +11,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 // Environment variables used in appsettings.ini.  
                 // Required Settings. 
-                "PCS_IOTHUB_CONNSTRING": "HostName=maryellen-05072fb7a.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=M/ylHFqJ3NqNSAHzJI3VRy6bkGrGav2fyId9bTfq4O8=",
+                "PCS_IOTHUB_CONNSTRING": "your Azure IoT Hub connection string",
                 "PCS_STORAGEADAPTER_WEBSERVICE_URL": "http://localhost:9022/v1/",
                 // Optional Settings. For additonal optional settings, refer to appsettings.ini directly.
                 "PCS_LOG_LEVEL": "Debug"
