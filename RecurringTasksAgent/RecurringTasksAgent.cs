@@ -7,12 +7,12 @@ using Microsoft.Azure.IoTSolutions.IotHubManager.Services.Diagnostics;
 
 namespace Microsoft.Azure.IoTSolutions.IotHubManager.RecurringTasksAgent
 {
-    public interface IRecurringTasks
+    public interface IRecurringTasksAgent
     {
         void Run();
     }
 
-    public class RecurringTasks : IRecurringTasks
+    public class RecurringTasksAgent : IRecurringTasksAgent
     {
         // When cache initialization fails, retry in few seconds
         private const int CACHE_INIT_RETRY_SECS = 10;
@@ -26,7 +26,7 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.RecurringTasksAgent
         private readonly IDeviceProperties deviceProperties;
         private readonly ILogger log;
 
-        public RecurringTasks(
+        public RecurringTasksAgent(
             IDeviceProperties deviceProperties,
             ILogger logger)
         {
