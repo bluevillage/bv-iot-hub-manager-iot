@@ -62,9 +62,7 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.WebService
             builder.RegisterInstance(config.ServicesConfig).As<IServicesConfig>().SingleInstance();
 
             // Auto - wire RecurringTasksAgent.DLL
-            var assembly = Assembly.GetEntryAssembly();
-            assembly = typeof(IAgent).GetTypeInfo().Assembly;
-            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces();
+            builder.RegisterType<Agent>().As<IAgent>().SingleInstance();
 
             // Instantiate only one logger
             // TODO: read log level from configuration
