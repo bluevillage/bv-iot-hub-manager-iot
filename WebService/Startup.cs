@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.IoTSolutions.IotHubManager.WebService.Auth;
 using Microsoft.Azure.IoTSolutions.IotHubManager.WebService.Runtime;
-using Microsoft.Azure.IoTSolutions.IotHubManager.DevicePropertiesAgent;
+using Microsoft.Azure.IoTSolutions.IotHubManager.RecurringTasksAgent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

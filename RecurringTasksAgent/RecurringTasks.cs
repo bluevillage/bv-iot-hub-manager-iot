@@ -5,7 +5,7 @@ using System.Threading;
 using Microsoft.Azure.IoTSolutions.IotHubManager.Services;
 using Microsoft.Azure.IoTSolutions.IotHubManager.Services.Diagnostics;
 
-namespace Microsoft.Azure.IoTSolutions.IotHubManager.DevicePropertiesAgent
+namespace Microsoft.Azure.IoTSolutions.IotHubManager.RecurringTasksAgent
 {
     public interface IRecurringTasks
     {
