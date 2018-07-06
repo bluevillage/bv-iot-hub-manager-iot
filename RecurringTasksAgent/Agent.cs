@@ -51,9 +51,9 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.RecurringTasksAgent
                     this.log.Info("DeviceProperties Cache created", () => { });
                     return;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    this.log.Debug("DeviceProperties Cache creation failed, will retry in few seconds", () => new { CACHE_INIT_RETRY_SECS, e });
+                    this.log.Debug("DeviceProperties Cache creation failed, will retry in few seconds", () => new { CACHE_INIT_RETRY_SECS});
                 }
 
                 this.log.Warn("Pausing thread before retrying DeviceProperties cache creation", () => new { CACHE_INIT_RETRY_SECS });
