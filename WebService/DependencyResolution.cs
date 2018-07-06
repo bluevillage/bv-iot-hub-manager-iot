@@ -48,6 +48,10 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.WebService
             // Auto-wire additional assemblies
             assembly = typeof(IServicesConfig).GetTypeInfo().Assembly;
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces();
+
+            // Auto-wire RecurringTasksAgent.DLL
+            assembly = typeof(IRecurringTasksAgent).GetTypeInfo().Assembly;
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces();
         }
 
         /// <summary>Setup Custom rules overriding autowired ones.</summary>
@@ -77,7 +81,6 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.WebService
             builder.RegisterType<Jobs>().As<IJobs>().SingleInstance();
             builder.RegisterType<StorageAdapterClient>().As<IStorageAdapterClient>().SingleInstance();
             builder.RegisterType<DeviceProperties>().As<IDeviceProperties>().SingleInstance();
-            builder.RegisterType<Agent>().As<IRecurringTasksAgent>().SingleInstance();
         }
 
         private static void RegisterFactory(IContainer container)
