@@ -61,9 +61,6 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.WebService
             // prepare the instance here.
             builder.RegisterInstance(config.ServicesConfig).As<IServicesConfig>().SingleInstance();
 
-            // Auto - wire RecurringTasksAgent.DLL
-            builder.RegisterType<Agent>().As<IAgent>().SingleInstance();
-
             // Instantiate only one logger
             // TODO: read log level from configuration
             var logger = new Logger(Uptime.ProcessId, LogLevel.Debug);
@@ -80,6 +77,7 @@ namespace Microsoft.Azure.IoTSolutions.IotHubManager.WebService
             builder.RegisterType<Jobs>().As<IJobs>().SingleInstance();
             builder.RegisterType<StorageAdapterClient>().As<IStorageAdapterClient>().SingleInstance();
             builder.RegisterType<DeviceProperties>().As<IDeviceProperties>().SingleInstance();
+            builder.RegisterType<Agent>().As<IRecurringTasksAgent>().SingleInstance();
         }
 
         private static void RegisterFactory(IContainer container)
